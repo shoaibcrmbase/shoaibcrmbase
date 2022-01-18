@@ -1,32 +1,41 @@
-// This function is the endpoint's request handler.
-exports = function({ query, headers, body}, response) {
-    // Data can be extracted from the request as follows:
+exports = function(changeEvent) {
+  /*
+    A Database Trigger will always call a function with a changeEvent.
+    Documentation on ChangeEvents: https://docs.mongodb.com/manual/reference/change-events/
 
-    // Query params, e.g. '?arg1=hello&arg2=world' => {arg1: "hello", arg2: "world"}
-    const {arg1, arg2} = query;
+    Access the _id of the changed document:
+    const docId = changeEvent.documentKey._id;
 
-    // Headers, e.g. {"Content-Type": ["application/json"]}
-    const contentTypes = headers["Content-Type"];
+    Access the latest version of the changed document
+    (with Full Document enabled for Insert, Update, and Replace operations):
+    const fullDocument = changeEvent.fullDocument;
 
-    // Raw request body (if the client sent one).
-    // This is a binary object that can be accessed as a string using .text()
-    const reqBody = body;
+    const updateDescription = changeEvent.updateDescription;
 
-    console.log("arg1, arg2: ", arg1, arg2);
-    console.log("Content-Type:", JSON.stringify(contentTypes));
-    console.log("Request body:", reqBody);
+    See which fields were changed (if any):
+    if (updateDescription) {
+      const updatedFields = updateDescription.updatedFields; // A document containing updated fields
+    }
 
-    // You can use 'context' to interact with other Realm features.
-    // Accessing a value:
-    // var x = context.values.get("value_name");
+    See which fields were removed (if any):
+    if (updateDescription) {
+      const removedFields = updateDescription.removedFields; // An array of removed fields
+    }
 
-    // Querying a mongodb service:
-    // const doc = context.services.get("mongodb-atlas").db("dbname").collection("coll_name").findOne();
+    Functions run by Triggers are run as System users and have full access to Services, Functions, and MongoDB Data.
 
-    // Calling a function:
-    // const result = context.functions.execute("function_name", arg1, arg2);
+    Access a mongodb service:
+    const collection = context.services.get("mongodb-atlas").db("zapier").collection("payment request");
+    const doc = collection.findOne({ name: "mongodb" });
 
-    // The return value of the function is sent as the response back to the client
-    // when the "Respond with Result" setting is set.
-    return  "Hello World!";
+    Note: In Atlas Triggers, the service name is defaulted to the cluster name.
+
+    Call other named functions if they are defined in your application:
+    const result = context.functions.execute("function_name", arg1, arg2);
+
+    Access the default http client and execute a GET request:
+    const response = context.http.get({ url: <URL> })
+
+    Learn more about http client here: https://docs.mongodb.com/realm/functions/context/#context-http
+  */
 };

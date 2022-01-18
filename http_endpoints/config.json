@@ -1,12 +1,1 @@
-[
-    {
-        "route": "/github",
-        "http_method": "POST",
-        "function_name": "api",
-        "validation_method": "SECRET_AS_QUERY_PARAM",
-        "respond_result": true,
-        "fetch_custom_user_data": false,
-        "create_user_on_auth": false,
-        "disabled": false
-    }
-]
+[]

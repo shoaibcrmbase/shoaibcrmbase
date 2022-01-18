@@ -1,6 +1,6 @@
 [
     {
         "name": "api",
-        "private": false
+        "private": true
     }
 ]
