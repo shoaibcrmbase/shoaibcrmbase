@@ -38,4 +38,9 @@ exports = function(changeEvent) {
 
     Learn more about http client here: https://docs.mongodb.com/realm/functions/context/#context-http
   */
+  exports = function(payload) {
+   const mongodb = context.services.get("mongodb-atlas");
+   const mycollection = mongodb.db("zapier").collection("payment request");
+   return mycollection.find({}).limit(10).toArray();
+};
 };
