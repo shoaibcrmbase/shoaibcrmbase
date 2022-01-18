@@ -1,0 +1,8 @@
+{
+    "app_id": "mongo_github-oprrf",
+    "config_version": 20210101,
+    "name": "Mongo_GitHub",
+    "location": "US-VA",
+    "deployment_model": "GLOBAL",
+    "environment": "development"
+}
