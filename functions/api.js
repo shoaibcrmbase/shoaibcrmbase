@@ -43,4 +43,8 @@ exports = function(changeEvent) {
    const mycollection = mongodb.db("zapier").collection("payment request");
    return mycollection.find({}).limit(10).toArray();
 };
+ exports = function(payload, response) {
+  console.log('- github event triggered -');
+  return true;
+};
 };

@@ -2,5 +2,9 @@
     {
         "name": "api",
         "private": true
+    },
+    {
+        "name": "insertGitHubIssue",
+        "private": false
     }
 ]
